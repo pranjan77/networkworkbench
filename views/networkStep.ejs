@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="fuelux">
+<head>
+    <meta charset="utf-8">
+    <title>Network Workbench</title>
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/colorbrewer.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" charset="utf-8"
+        href="/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8"
+        href="/css/identity.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8"
+        href="/css/kbase-common.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/kbase.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/fuelux.min.css">
+    <style type="text/css" media="screen">
+        #container { margin-top: 80px; }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="nav" class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <a href="#">
+                <img class="logo" src="/img/kbase-logo-small.png" width="46px"/>
+            </a>
+            <a class="brand" href="#">Network Workbench</a>
+            <ul class="nav" id="nav-content">
+            </ul>
+            <ul class="nav pull-right" id="nav-content-right">
+                <li><a href="#" id="help-link"><i class="icon-question-sign"></i> Help</a></li>
+                <li><a href="/">Datavis Library</a></li>
+			    <li id = 'login'></li>
+            </ul>
+            <div id="progress-indicator" class="span2 pull-right"></div>
+        </div>
+    </div>
+    <div id="container" class="container">
+		<div id="blurb">
+			<div class="" style="height: 100px;">
+				<div class="media">
+					<a class="pull-left" href="#">
+			  			<img src="/img/network-icon.png" class="logo" style='height:80px;width:80px;'>
+					</a>
+					<div class="media-body">
+						<h3 class="media-heading">The Network Workbench</h3>
+						  <p>Explore KBase networks using dynamic visualizations. Navigate among sets of
+						  genes and clusters over a variety of network data sets available for microbes,
+						  plants, and metagenomic communities.</p>
+					</div>
+				</div>
+			</div>
+
+			<div  class='row'>
+
+				<div class="well wizard-example">
+				  <div id="MyWizard" class="wizard">
+					<ul class="steps"a>
+					  <li data-target="#step1" class="active"><span class="badge badge-info">1</span>Step 1<span class="chevron"></span></li>
+					  <li data-target="#step2"><span class="badge">2</span>Step 2<span class="chevron"></span></li>
+					  <li data-target="#step3"><span class="badge">3</span>Step 3<span class="chevron"></span></li>
+					  <li data-target="#step4"><span class="badge">4</span>Step 4<span class="chevron"></span></li>
+					  <li data-target="#step5"><span class="badge">5</span>Step 5<span class="chevron"></span></li>
+					</ul>
+					<div class="actions">
+					  <button class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
+					  <button class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+					</div>
+				  </div>
+				  <div class="step-content">
+					  <div class="step-pane active" id="step1"> <!-- Start of Step 1 -->
+						  <br/>
+						  <h2>Network Co-expression Input</h2> 
+						  <blockquote><small>Please upload input expression table, sample id information and gene functional annotation.</small></blockquote>
+						  <hr>
+
+						  <div style='padding: 30px 0 20px 30px;'>
+							  <form class="form-horizontal" >
+								  <div class="control-group">
+									  <label class="control-label" for="inputEmail">Email</label>
+									  <div class="controls">
+										  <input type="text" id="inputEmail" placeholder="Email">
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="expTable">Upload Expression Table</label>
+									  <div class="controls">
+										  <input type="file" id="expTable" placeholder="Expression Table">
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="sampleId">Sample Id Information</label>
+									  <div class="controls">
+										  <input type="file" id="sampleId" placeholder="Sample Id Info">
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="geneAnno">Gene Annotations</label>
+									  <div class="controls">
+										  <input type="file" id="geneAnno" placeholder="Gene Annotations">
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <div class="controls">
+										  <button type="submit" class="btn btn-info">Upload Files</button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+						  <hr>
+						  <br>Click 'Next' to continue.
+					  </div> <!-- End of Step 1 -->
+
+
+
+					  <div class="step-pane" id="step2"> <!-- Start of Step 2 -->
+						  <br/>
+						  <h2>Execute Co-expression Analysis</h2> 
+						  <blockquote><small>We are using WGCNA approach to calculate co-expression networks. Please confirm your inputs and click Start Execution.</small></blockquote>
+						  <hr>
+
+						  <div style='padding: 30px 0 20px 30px;'>
+							  <form class="form-horizontal" >
+								  <div class="control-group">
+									  <label class="control-label" for="inputEmail">Email</label>
+									  <div class="controls">
+										  <i class='icon-envelope-alt' ></i> ghkora@gmail.com
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="expTable">Upload Expression Table</label>
+									  <div class="controls">
+										  <i class='icon-file-alt' ></i> exp-table.csv
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="sampleId">Sample Id Information</label>
+									  <div class="controls">
+										  <i class='icon-file-alt' ></i> sampleIdInfo.csv
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="geneAnno">Gene Annotations</label>
+									  <div class="controls">
+										  <i class='icon-file-alt' ></i> geneAnnotation.csv
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <div class="controls">
+										  <button type="submit" class="btn btn-info">Start Execution</button>
+									  </div>
+								  </div>
+							  </form>
+						  </div>
+						  <hr>
+						  <br>Click 'Next' to continue.
+					  
+					  </div><!-- End of Step 2 -->
+
+					  <div class="step-pane" id="step3"> <!-- Start of Step 3 -->
+						  <br/>
+						  <h2>Execution Status</h2> 
+						  <blockquote><small>Please be patient, job has been submitted, the page will auto-refresh once done.</small></blockquote>
+						  <hr>
+
+						  <div style='padding: 30px 0 20px 30px;'>
+							  <center>
+								  <i class="icon-spinner icon-spin icon-4x"></i> <br/><br/><br/><br/>
+								  Job submitted <strong>successfully</strong>. The page will auto-refresh when ready.<br/>
+								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
+								  For status updates please use the following id <strong>23kjsd2334kskd2334j</strong>.
+							  </center>
+						  </div>
+						  <hr>
+					  
+					  </div><!-- End of Step 3 -->
+
+					  <div class="step-pane" id="step4"> <!-- Start of Step 4 -->
+						  <br/>
+						  <h2>Execution Sucessful</h2> 
+						  <blockquote><small>Now you are at the 4th step of this wizard example. Click 'Next' to finish up.</small></blockquote>
+						  <hr>
+
+						  <div style='padding: 30px 0 20px 30px;'>
+							  <center>
+								  <i class="icon-ok-sign icon-4x"></i> <br/><br/><br/><br/>
+								  Job completed <strong>successfully</strong>. <br/>
+								  Notification sent to <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
+							  </center>
+						  </div>
+						  <hr>
+					  
+					  </div><!-- End of Step 4 -->
+
+					  <div class="step-pane" id="step5"> <!-- Start of Step 5 -->
+						  <br/>
+						  <h2>Co-expression Visualization</h2> 
+						  <blockquote><small>Visualize the network. Nodes and edges are displayed for individual clusters.</small></blockquote>
+						  <hr>
+
+						  <div style='padding: 30px 0 20px 30px;'>
+							  <center>
+								  The results file can be <a href='#' ><i class='icon-download-alt'></i> downloaded </a> <br/>
+								  An email is also sent with the file as attachement to <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
+							  </center>
+							  <div style='padding-top:30px;'>
+								  <iframe src="http://bl.ocks.org/christophermanning/raw/1703449/#/[29,25,-39,48,-17,20,-35,-9]20/0/0" height="600" frameBorder="0" style='width:100%;'></iframe>
+							  </div>
+						  </div>
+						  <hr>
+					  
+					  </div><!-- End of Step 5 -->
+				  </div>
+				  <br>
+				  <input class="btn" id="btnWizardPrev" value="Back" type="button">
+				  <input class="btn btn-primary" id="btnWizardNext" value="Next" type="button">
+
+				</div>
+				<!-- /well -->
+
+				<hr>
+
+
+			</div>
+
+		  </div>
+
+    </div>
+</div>
+<% include layout/footer %>
+</body>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.cookie.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/kbase-ui-min.js"></script>
+    <script src="/js/loader.min.js"></script>
+    <script src="/js/all.min.js"></script>
+	<script type = 'text/javascript'>
+
+		$(function() {
+			$('#login').kbaseLogin(
+				{
+					style : 'text',
+				}
+			);
+			$('#MyWizard').on('change', function(e, data) {
+				console.log('change');
+				if(data.step===3 && data.direction==='next') {
+				// return e.preventDefault();
+				}
+				});
+			$('#MyWizard').on('changed', function(e, data) {
+				console.log('changed');
+				});
+			$('#MyWizard').on('finished', function(e, data) {
+				console.log('finished');
+				});
+			$('#btnWizardPrev').on('click', function() {
+				$('#MyWizard').wizard('previous');
+				});
+			$('#btnWizardNext').on('click', function() {
+					$('#MyWizard').wizard('next','foo');
+					});
+			$('#btnWizardStep').on('click', function() {
+					var item = $('#MyWizard').wizard('selectedItem');
+					console.log(item.step);
+					});
+			$('#MyWizard').on('stepclick', function(e, data) {
+					console.log('step' + data.step + ' clicked');
+					if(data.step===1) {
+					// return e.preventDefault();
+					}
+			});
+
+	
+		});
+
+	</script>
+</html>

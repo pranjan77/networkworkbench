@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+    <meta charset="utf-8">
+    <title>Network Workbench</title>
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/colorbrewer.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" charset="utf-8"
+        href="/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8"
+        href="/css/identity.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8"
+        href="/css/kbase-common.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/kbase.css">
+    <link rel="stylesheet" type="text/css" media="screen" charset="utf-8" 
+        href="/css/font-awesome.css">
+    <style type="text/css" media="screen">
+        #container { margin-top: 80px; }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="nav" class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <a href="#">
+                <img class="logo" src="/img/kbase-logo-small.png" width="46px"/>
+            </a>
+            <a class="brand" href="#">Network Workbench</a>
+            <ul class="nav" id="nav-content">
+            </ul>
+            <ul class="nav pull-right" id="nav-content-right">
+                <li><a href="#" id="help-link"><i class="icon-question-sign"></i> Help</a></li>
+                <li><a href="/">Datavis Library</a></li>
+			    <li id = 'login'></li>
+            </ul>
+            <div id="progress-indicator" class="span2 pull-right"></div>
+        </div>
+    </div>
+    <div id="container" class="container">
+		<div id="blurb">
+			<div class="hero-unit" style="min-height: 300px;">
+			  <img src="/img/network-icon.png" class="logo" />
+
+			  <h2>The Network Workbench</h2>
+
+			  <p>Explore KBase networks using dynamic visualizations. Navigate among sets of
+			  genes and clusters over a variety of network data sets available for microbes,
+			  plants, and metagenomic communities.</p>
+
+			  <div style="margin-top: 40px; text-align: center;">
+				  <a href='/nw/step1' class="btn btn-large btn-primary">Get Started
+				  <i class="icon-circle-arrow-right"></i>
+				  </a>
+				  <button class="btn btn-large btn-info">Check Existing Status
+				  <i class="icon-cogs"></i>
+				  </button>
+			  </div>
+			</div>
+
+			<div class="row">
+			  <div class="span6">
+				<h3>Developers</h3>
+
+				<table class="table contact-table">
+				  <thead>
+					<tr>
+					  <th>Name</th>
+
+					  <th>Role</th>
+
+					  <th>Email</th>
+					</tr>
+				  </thead>
+
+				  <tbody>
+					<tr>
+						<td><i class='icon-user'> </i>Priya Ranjan </td>
+
+					  <td>Developer</td>
+
+					  <td><i class='icon-envelope-alt'> </i>pranjan@utk.edu</td>
+					</tr>
+
+					<tr>
+						<td><i class='icon-user'> </i>Syed Mustafa</td>
+
+					  <td>Developer</td>
+
+					  <td><i class='icon-envelope-alt'> </i>nms@ornl.gov</td>
+					</tr>
+				  </tbody>
+				</table><small>This project relies on user input and testing, so please contact
+				us with any suggestions or comments.</small>
+			  </div>
+
+			  <div class="span3">
+				  <h3>Related Links</h3>
+				  <span style="width: 25px; display: inline-block; "><i class="icon-external-link"></i> </span>
+				  <a href="/"><strong>KBase Datavis
+						  Library</strong><br /></a> 
+				  <span style="width: 25px; display: inline-block; "><i class="icon-external-link"></i> </span>
+				  <a href=
+				"https://github.com/pranjan77/networkworkbench"><strong>Project @
+					GitHub</strong><br /></a> 
+			
+				 <span style="width: 25px; display: inline-block; "><i class="icon-external-link"></i> </span>
+				<a href="http://www.kbase.us">KBase Homepage<br /></a>
+				<span style="width: 25px; display: inline-block; "><i class="icon-external-link"></i> </span>
+				<a href="http://www.kbase.us/labs">KBase Labs<br /></a> 
+				<span style="width: 25px; display: inline-block; "><i class="icon-external-link"></i> </span>
+				<a href=
+				"http://www.kbase.us/developer-zone">KBase Developer Zone<br /></a>
+			  </div>
+
+			  <div class="span3">
+				
+				  <h3>Documentation</h3>
+				  <span style="width: 25px; display: inline-block; "><i class="icon-question-sign"></i> </span>
+				  <a href="#">Using the workbench<br /></a>
+			  </div>
+			</div>
+		  </div>
+
+    </div>
+</div>
+<% include layout/footer %>
+</body>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/jquery.cookie.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/kbase-ui-min.js"></script>
+	<script type = 'text/javascript'>
+
+		$(function() {
+			$('#login').kbaseLogin(
+				{
+					style : 'text',
+				}
+			)
+		});
+
+	</script>
 </html>
