@@ -91,14 +91,17 @@ auth = function(req, res, next) {
 				email : '',
 				expTable: {
 					fileName: '',
+					attributes:{},
 					shockId: ''
 				},
 				sampleId: {
 					fileName: '',
+					attributes:{},
 					shockId: ''
 				},
 				geneAnno: {
 					fileName: '',
+					attributes:{},
 					shockId: ''
 				}
 			},

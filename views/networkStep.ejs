@@ -94,18 +94,21 @@
 									  <label class="control-label" for="expTable">Upload Expression Table</label>
 									  <div class="controls">
 										  <input type="file" id="expTable" placeholder="Expression Table">
+										  <span type="file" id="expTableOk" style='color:#00f; display:none;'><i id='expTableOkIcon' class='icon-spinner icon-spin icon-large' > </i></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="sampleId">Sample Id Information</label>
 									  <div class="controls">
 										  <input type="file" id="sampleId" placeholder="Sample Id Info">
+										  <span type="file" id="sampleIdOk" style='color:#00f; display:none;'><i id='sampleIdOkIcon' class='icon-spinner icon-spin icon-large' > </i></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="geneAnno">Gene Annotations</label>
 									  <div class="controls">
 										  <input type="file" id="geneAnno" placeholder="Gene Annotations">
+										  <span type="file" id="geneAnnoOk" style='color:#00f; display:none;'><i id='geneAnnoOkIcon' class='icon-spinner icon-spin icon-large' > </i></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
@@ -278,6 +281,32 @@
 					if(data.step===1) {
 					// return e.preventDefault();
 					}
+			});
+
+			$('#expTable,#sampleId,#geneAnno').live('change', function() {
+
+				var id = $(this).attr('id');
+				$('#' + id + 'Ok').show();
+
+
+				var data1 = new FormData();
+				jQuery.each($('#' + id )[0].files, function(i, file) {
+					data1.append('file', file);
+				});
+				data1.append('type', id );
+			
+				$.ajax({  
+				type: "POST", 
+				cache: false,
+				contentType: false,
+				processData: false,
+				url: "/uploadFileAction",  
+				data: data1,  
+				success: function( data )  {  
+					$('#' + id + 'OkIcon').attr('class', 'icon-ok');
+					//alert(JSON.stringify(data));
+					}
+				});  
 			});
 
 	
