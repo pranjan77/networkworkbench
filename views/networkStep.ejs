@@ -88,6 +88,7 @@
 									  <label class="control-label" for="inputEmail">Email</label>
 									  <div class="controls">
 										  <input type="text" id="inputEmail" placeholder="Email">
+										  <span type="file" id="inputEmailOk" style='color:#00f; display:none;'><i id='inputEmailOkIcon' class='icon-spinner icon-spin icon-large' > </i></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
@@ -111,11 +112,6 @@
 										  <span type="file" id="geneAnnoOk" style='color:#00f; display:none;'><i id='geneAnnoOkIcon' class='icon-spinner icon-spin icon-large' > </i></span>
 									  </div>
 								  </div>
-								  <div class="control-group">
-									  <div class="controls">
-										  <button type="submit" class="btn btn-info">Upload Files</button>
-									  </div>
-								  </div>
 							  </form>
 						  </div>
 						  <hr>
@@ -135,25 +131,25 @@
 								  <div class="control-group">
 									  <label class="control-label" for="inputEmail">Email</label>
 									  <div class="controls">
-										  <i class='icon-envelope-alt' ></i> ghkora@gmail.com
+										  <i class='icon-envelope-alt' ></i> <span id='step2Email'>ghkora@gmail.com </span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="expTable">Upload Expression Table</label>
 									  <div class="controls">
-										  <i class='icon-file-alt' ></i> exp-table.csv
+										  <i class='icon-file-alt' ></i> <span id='step2expTable'>exp-table.csv</span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="sampleId">Sample Id Information</label>
 									  <div class="controls">
-										  <i class='icon-file-alt' ></i> sampleIdInfo.csv
+										  <i class='icon-file-alt' ></i> <span id='step2sampleId'>exp-table.csv</span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="geneAnno">Gene Annotations</label>
 									  <div class="controls">
-										  <i class='icon-file-alt' ></i> geneAnnotation.csv
+										  <i class='icon-file-alt' ></i> <span id='step2geneAnno'>exp-table.csv</span>
 									  </div>
 								  </div>
 								  <div class="control-group">
@@ -282,6 +278,15 @@
 					// return e.preventDefault();
 					}
 			});
+			$('#inputEmail').change(function() {
+				$('#inputEmailOk').show();
+
+				$.post("/updateEmail", { email: $('#inputEmail').val() })
+				.done(function(data) {
+					$('#inputEmailOkIcon').attr('class', 'icon-ok');
+					$('#step2Email').text($('#inputEmail').val() );
+				});
+			});
 
 			$('#expTable,#sampleId,#geneAnno').live('change', function() {
 
@@ -304,7 +309,7 @@
 				data: data1,  
 				success: function( data )  {  
 					$('#' + id + 'OkIcon').attr('class', 'icon-ok');
-					//alert(JSON.stringify(data));
+					$('#step2' + id ).text($('#' + id ).val().split('\\').pop());
 					}
 				});  
 			});

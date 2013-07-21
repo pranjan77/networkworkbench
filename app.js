@@ -155,6 +155,7 @@ app.get('/nw/step3',  routes.nwStep3);
 app.get('/nw/step4',  routes.nwStep4);
 
 app.post('/uploadFileAction', auth, uploadHandler, routes.uploadFileAction);
+app.post('/updateEmail', auth, routes.updateEmail);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

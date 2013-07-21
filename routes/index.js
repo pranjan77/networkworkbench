@@ -45,116 +45,18 @@ exports.uploadFileAction = function(req, res){
 		}
 	});
 
-	/*
-	if ( req.body.type === 'expTable') {
+};
 
-		experiment.step1.expTable.fileName = res.locals.DBNAME;
-		var file = res.locals.TARGET;
+exports.updateEmail = function(req, res){
 
-		var shock = new SHOCK( url, un, ps, file);
+	var session = res.locals.session;
+	var experiment = session.data;
+	var sessionId = experiment.sessionId;
 
-		shock.addAttributesSync( 'sessionId', sessionId);
-		_.extend( experiment.step1.expTable.attributes, {'sessionId': sessionId});
-
-		shock.addAttributesSync( 'fileType', req.body.type);
-		_.extend( experiment.step1.expTable.attributes, {'fileType': req.body.type});
-
-		shock.addAttributesSync( 'experimentType', 'coexpression');
-		_.extend( experiment.step1.expTable.attributes, {'experimentType': 'coexpression'});
-
-		shock.sendFile(function(err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				experiment.step1.expTable.shockId = result.data.id;
-				req.session.data = experiment;
-				console.dir(experiment);
-				res.send(200, result);
-			}
-		});
-
-	} else if (req.body.type === 'sampleId' ) {
-		experiment.step1.sampleId.fileName = res.locals.DBNAME;
-		var file = res.locals.TARGET;
-
-		var shock = new SHOCK( url, un, ps, file);
-		shock.addAttributesSync( 'sessionId', sessionId);
-		_.extend( experiment.step1.expTable.attributes, {'sessionId': sessionId});
-
-		shock.addAttributesSync( 'fileType', req.body.type);
-		_.extend( experiment.step1.expTable.attributes, {'fileType': req.body.type});
-
-		shock.addAttributesSync( 'experimentType', 'coexpression');
-		_.extend( experiment.step1.expTable.attributes, {'experimentType': 'coexpression'});
-
-		shock.sendFile(function(err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				experiment.step1.sampleId.shockId = result.data.id;
-				req.session.data = experiment;
-				console.dir(experiment);
-				res.send(200, result);
-			}
-		});
-
-	} else if (req.body.type === 'geneAnno' ) {
-		experiment.step1.geneAnno.fileName = res.locals.DBNAME;
-		var file = res.locals.TARGET;
-
-		var shock = new SHOCK( url, un, ps, file);
-		shock.addAttributesSync( 'sessionId', sessionId);
-		shock.addAttributesSync( 'fileType', req.body.type);
-		shock.addAttributesSync( 'experimentType', 'coexpression');
-
-		shock.sendFile(function(err, result) {
-			if (err) {
-				console.log(err);
-			} else {
-				experiment.step1.geneAnno.shockId = result.data.id;
-				req.session.data = experiment;
-				console.dir(experiment);
-				res.send(200, result);
-			}
-		});
-
-
-	}
-*/
-
-
-
-	/*
-	var attributes = {};
-	attributes.experiment_type = 'coexpression';
-	attributes.experiment_id = sessionId;
-	attributes.filetype = 'expressionTable';
-
-	var fd = fs.openSync(res.locals.ATTRIB, 'a+', 0666);
-	fs.writeSync(fd, JSON.stringify(attributes));
-	fs.closeSync(fd);
-
-	rest.post(url, {
-		multipart: true,
-		username: un,
-		password: ps,
-		data: {
-			'attributes': rest.file(res.locals.ATTRIB),
-		'upload': rest.file(res.locals.TARGET)
-		}
-	}).on('complete', function(data) {
-		console.dir(data);
-		if ( req.body.type === 'expTable') {
-			experiment.step1.expTable.fileName
-
-		} else if (req.body.type === 'sampleId' ) {
-
-		} else if (req.body.type === 'geneAnno' ) {
-
-		}
-		res.send(200, data);
-	});
-	*/
+	experiment.step1.email = req.body.email;
+	req.session.data = experiment;
+	console.dir(experiment);
+	res.send(200);
 
 };
 
