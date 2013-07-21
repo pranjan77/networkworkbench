@@ -1,0 +1,21 @@
+
+var SHOCK = require('../lib');
+
+	var url = 'http://140.221.84.236:8000/node';
+	var un = 'gpuser';
+	var ps = 'bescdemo';
+	var file = __dirname + '/example/test1';
+
+
+var shock = new SHOCK( url, un, ps, file );
+
+shock.addAttributesSync('abc','val1');
+shock.addAttributesSync('pqr','val2');
+
+shock.sendFile(function(err, result) {
+	if (err) {
+		console.log(err);
+	} else {
+		console.dir(result);
+	}
+});

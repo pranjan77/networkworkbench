@@ -154,7 +154,7 @@
 								  </div>
 								  <div class="control-group">
 									  <div class="controls">
-										  <button type="submit" class="btn btn-info">Start Execution</button>
+										  <button type="button" id='submitJob' class="btn btn-info">Start Execution</button>
 									  </div>
 								  </div>
 							  </form>
@@ -174,8 +174,8 @@
 							  <center>
 								  <i class="icon-spinner icon-spin icon-4x"></i> <br/><br/><br/><br/>
 								  Job submitted <strong>successfully</strong>. The page will auto-refresh when ready.<br/>
-								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
-								  For status updates please use the following id <strong>23kjsd2334kskd2334j</strong>.
+								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> <span id='step3Email'>ghkora@gmail.com </span>
+</strong>.<br/>
 							  </center>
 						  </div>
 						  <hr>
@@ -285,7 +285,17 @@
 				.done(function(data) {
 					$('#inputEmailOkIcon').attr('class', 'icon-ok');
 					$('#step2Email').text($('#inputEmail').val() );
+					$('#step3Email').text($('#inputEmail').val() );
 				});
+			});
+
+			$('#submitJob').click(function() {
+				$.post("/submitJob", null)
+				.done(function(data) {
+					alert('done');
+				});
+				$('#MyWizard').wizard('next','foo');
+				return false;
 			});
 
 			$('#expTable,#sampleId,#geneAnno').live('change', function() {

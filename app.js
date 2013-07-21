@@ -4,8 +4,7 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
+  , routes = require('./routes/index')
   , http = require('http')
   , path = require('path');
 
@@ -26,6 +25,9 @@ if (!fs.existsSync(__dirname + tmpUpload)) mkdirp.sync(__dirname + tmpUpload);
 
 var uploadDirBase = '/public/uploads/actual/';
 if (!fs.existsSync(__dirname + uploadDirBase)) mkdirp.sync(__dirname + uploadDirBase);
+
+var aweInput = '/public/AWEInputs/';
+if (!fs.existsSync(__dirname + aweInput)) mkdirp.sync(__dirname + aweInput);
 
 // all environments
 app.set('port', process.env.PORT || 80);
@@ -108,9 +110,12 @@ auth = function(req, res, next) {
 			step2 : {
 				execurationStarted: false,
 				startTime : null,
+				status: '',
 				notificationSent : false,
+				AWEJob: null,
 				AWEInput: {
 					fileName: '',
+					attributes:{},
 					shockId: ''
 				},
 				visited: false
@@ -156,6 +161,7 @@ app.get('/nw/step4',  routes.nwStep4);
 
 app.post('/uploadFileAction', auth, uploadHandler, routes.uploadFileAction);
 app.post('/updateEmail', auth, routes.updateEmail);
+app.post('/submitJob', auth, routes.submitJob);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

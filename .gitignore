@@ -1,2 +1,5 @@
 node_modules
 public/uploads
+public/AWEInputs/
+!node_modules/node-shock
+!node_modules/node-awe
