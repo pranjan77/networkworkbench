@@ -78,6 +78,31 @@ exports.submitJob = function(req, res) {
 
 	prepareAWEInput( experiment, outputfile );
 
+	var shock = new SHOCK( url, un, ps, outputfile);
+
+	shock.addAttributesSync( 'sessionId', sessionId);
+	_.extend( experiment.step2.AWEInput.attributes, {'sessionId': sessionId});
+
+	shock.addAttributesSync( 'fileType', 'AWEJobInput');
+	_.extend( experiment.step2.AWEInput.attributes, {'fileType': 'AWEJobInput'});
+
+	shock.addAttributesSync( 'experimentType', 'coexpression');
+	_.extend( experiment.step2.AWEInput.attributes, {'experimentType': 'coexpression'});
+
+	shock.sendFile(function(error, result2) {
+		if (error) {
+			console.log(error);
+			res.send(500);
+		} else {
+			experiment.step2.AWEInput.shockId = result2.data.id;
+			req.session.data = experiment;
+			console.dir(experiment);
+			res.send(200, result2);
+		}
+	});
+
+	/*
+
 	var awe = new AWE( url2, outputfile);
 	awe.submitJob(function(err, result) {
 		if (err) {
@@ -94,33 +119,9 @@ exports.submitJob = function(req, res) {
 					res.send(200, result);
 					//
 
-					/*
-			var shock = new SHOCK( url, un, ps, outputfile);
-
-			shock.addAttributesSync( 'sessionId', sessionId);
-			_.extend( experiment.step2.AWEInput.attributes, {'sessionId': sessionId});
-
-			shock.addAttributesSync( 'fileType', 'AWEJobInput');
-			_.extend( experiment.step2.AWEInput.attributes, {'fileType': 'AWEJobInput'});
-
-			shock.addAttributesSync( 'experimentType', 'coexpression');
-			_.extend( experiment.step2.AWEInput.attributes, {'experimentType': 'coexpression'});
-
-			shock.sendFile(function(error, result2) {
-				if (error) {
-					console.log(error);
-					res.send(500);
-				} else {
-					experiment.step2.AWEInput.shockId = result2.data.id;
-					req.session.data = experiment;
-					console.dir(experiment);
-					res.send(200, result2);
-				}
-			});
-			*/
-
 		}
 	});
+	*/
 
 
 }
