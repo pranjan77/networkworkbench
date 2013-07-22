@@ -99,7 +99,6 @@ exports.submitJob = function(req, res) {
 			console.dir(experiment);
 			res.send(200, result2);
 
-			/*
 			var awe = new AWE( url2, outputfile);
 			awe.submitJob(function(err, result) {
 				if (err) {
@@ -110,15 +109,13 @@ exports.submitJob = function(req, res) {
 					experiment.step2.AWEJob = result.data;
 					experiment.step2.execurationStarted = true;
 					experiment.step2.status = result.data.state;
+					experiment.step3.status = result.data.state;
+					experiment.step3.visited = true;
 					req.session.data = experiment;
-					//console.dir(experiment);
-					console.log('Inside success of awe submission');
+					console.dir(experiment);
 					res.send(200, result);
-							//
-
 				}
 			});
-			*/
 		}
 	});
 
