@@ -2,8 +2,8 @@
 var fs = require('fs');
 var rest = require('restler');
 var dateFormat = require('dateformat');
-var SHOCK = require('node-shock');
-var AWE = require('node-awe');
+var SHOCK = require('shock');
+var AWE = require('awe');
 var _	= require('underscore');
 var template = (__dirname + '/template');
 
@@ -143,7 +143,7 @@ var prepareAWEInput = function(experiment, outputfile) {
 
 	var task0Args = '-i @data_csv --output=data_filtered_csv -m ' + m +
 					' -p ' + p  + 
-					' --sample_index ' + sample_index  + 
+					' --sample_index=' + sample_index  + 
 					' -u ' + u + 
 					' -r ' + r + 
 					' -d ' + d ; 
@@ -178,7 +178,7 @@ var prepareAWEInput = function(experiment, outputfile) {
 		p3 = '50',
 		d3 = '0.99';
 
-	var task3Args = '--i @data_filtered_csv -o module_csv -c hclust -n simple ' + 
+	var task3Args = '-i @data_filtered_csv -o module_csv -c hclust -n simple ' + 
 					' -s ' + s3  + 
 					' -d ' + d3  + 
 					' -r ' + r3  + 

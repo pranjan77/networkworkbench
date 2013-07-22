@@ -11,8 +11,7 @@
     "restler": "*",
     "mkdirp": "*",
     "dateformat": "*",
-    "node-shock": "0.0.1",
-    "node-awe": "0.0.1",
+    "awe": "0.0.1",
     "shock": "0.0.1"
   }
 }
