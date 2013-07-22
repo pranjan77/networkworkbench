@@ -98,31 +98,29 @@ exports.submitJob = function(req, res) {
 			req.session.data = experiment;
 			console.dir(experiment);
 			res.send(200, result2);
-		}
-	});
 
-	/*
-
-	var awe = new AWE( url2, outputfile);
-	awe.submitJob(function(err, result) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.dir(result);
-			experiment.step2.AWEJob = result.data;
-			experiment.step2.execurationStarted = true;
-			experiment.step2.status = result.data.state;
-			req.session.data = experiment;
-
-					// Delete following lines.
-					console.dir(experiment);
+			/*
+			var awe = new AWE( url2, outputfile);
+			awe.submitJob(function(err, result) {
+				if (err) {
+					console.log(err);
+					res.send(500, null);
+				} else {
+					console.dir(result);
+					experiment.step2.AWEJob = result.data;
+					experiment.step2.execurationStarted = true;
+					experiment.step2.status = result.data.state;
+					req.session.data = experiment;
+					//console.dir(experiment);
+					console.log('Inside success of awe submission');
 					res.send(200, result);
-					//
+							//
 
+				}
+			});
+			*/
 		}
 	});
-	*/
-
 
 }
 
