@@ -172,9 +172,10 @@
 
 						  <div style='padding: 30px 0 20px 30px;'>
 							  <center>
-								  <i class="icon-spinner icon-spin icon-4x"></i> <br/><br/><br/><br/>
+								  <i id='bigsign' class="icon-spinner icon-spin icon-4x"></i> <br/><br/><br/><br/>
+								  Current Status <b><span id='status' >submitted</span></b> &nbsp; &nbsp; Tasks Remaining <b><span id='remTasks' >0</span></b> <br/>
 								  Job submitted <strong>successfully</strong>. The page will auto-refresh when ready.<br/>
-								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> <span id='step3Email'>ghkora@gmail.com </span>
+								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> <span id='step3Email'>ghkora@gmail.com</span>
 </strong>.<br/>
 							  </center>
 						  </div>
@@ -245,6 +246,7 @@
 	<script type = 'text/javascript'>
 
 		$(function() {
+			var loop = false;
 			$('#login').kbaseLogin(
 				{
 					style : 'text',
@@ -293,9 +295,38 @@
 				$.post("/submitJob", null)
 				.done(function(data) {
 					$('#MyWizard').wizard('next','foo');
+					loop = true;
+					window.setInterval(checkStatus, 10000);
 				});
 				return false;
 			});
+
+			function checkStatus() { 
+				if (loop) {
+					$.post("/checkStatus")
+					.done(function(data, textStatus, xhr) {
+						if ( xhr.status === 200 ) {
+							var status = data.data.state;
+							$('#status').text( status );
+							$('#remTasks').text( data.data.remaintasks );
+							if ( status === 'completed' ) {
+								loop = false;
+								$('#MyWizard').wizard('next','foo');
+							} else if ( status === 'submitted' ) {
+
+							} else {
+								// Error occured
+								loop = false;
+								$('#bigsign').attr('class','icon-warning icon-4x');
+							}
+						} else {
+							loop = false;
+							$('#bigsign').attr('class','icon-warning icon-4x');
+
+						}
+					});
+				}
+			};
 
 			$('#expTable,#sampleId,#geneAnno').live('change', function() {
 

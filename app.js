@@ -112,7 +112,8 @@ auth = function(req, res, next) {
 				startTime : null,
 				status: '',
 				notificationSent : false,
-				AWEJob: null,
+				AWEJob: {},
+				AWEJobId: null,
 				AWEInput: {
 					fileName: '',
 					attributes:{},
@@ -162,6 +163,7 @@ app.get('/nw/step4',  routes.nwStep4);
 app.post('/uploadFileAction', auth, uploadHandler, routes.uploadFileAction);
 app.post('/updateEmail', auth, routes.updateEmail);
 app.post('/submitJob', auth, routes.submitJob);
+app.post('/checkStatus', auth, routes.checkStatus);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

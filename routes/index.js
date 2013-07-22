@@ -96,8 +96,10 @@ exports.submitJob = function(req, res) {
 		} else {
 			experiment.step2.AWEInput.shockId = result2.data.id;
 			req.session.data = experiment;
+			/*
 			console.dir(experiment);
 			res.send(200, result2);
+			*/
 
 			var awe = new AWE( url2, outputfile);
 			awe.submitJob(function(err, result) {
@@ -106,8 +108,10 @@ exports.submitJob = function(req, res) {
 					res.send(500, null);
 				} else {
 					console.dir(result);
-					experiment.step2.AWEJob = result.data;
+					var jobDtls = result.data;
+					_.extend(experiment.step2.AWEJob, jobDtls);
 					experiment.step2.execurationStarted = true;
+					experiment.step2.AWEJobId = jobDtls.id;
 					experiment.step2.status = result.data.state;
 					experiment.step3.status = result.data.state;
 					experiment.step3.visited = true;
@@ -116,6 +120,32 @@ exports.submitJob = function(req, res) {
 					res.send(200, result);
 				}
 			});
+		}
+	});
+
+}
+
+exports.checkStatus = function(req, res) {
+
+	var session = res.locals.session;
+	var experiment = session.data;
+	var sessionId = experiment.sessionId;
+
+	console.dir(experiment.step2.AWEJob);
+	console.dir(experiment.step2.AWEJobId);
+	var id = experiment.step2.AWEJobId;
+
+	var awe = new AWE( url2 );
+	awe.getStatus(id, function(err, result) {
+		if (err) {
+			console.log(err);
+			res.send(500, null);
+		} else {
+			experiment.step2.status = result.data.state;
+			experiment.step3.status = result.data.state;
+			experiment.step3.visited = true;
+			req.session.data = experiment;
+			res.send(200, result);
 		}
 	});
 
