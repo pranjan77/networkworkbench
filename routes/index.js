@@ -193,7 +193,7 @@ var prepareAWEInput = function(experiment, outputfile) {
 	var s4 = experiment.sessionId; //Give sessionId
 	var u4 = url; //Give sessionId
 
-	var task4Args = ' @module_csv @net_edge_csv @annotation_csv -o merged_list_json ' + 
+	var task4Args = ' -m @module_csv -e @net_edge_csv -a @annotation_csv -o merged_list_json ' + 
 					' -s ' + s4  + 
 					' -u ' + u4  ; 
 	aweInput.tasks[3].cmd.args  = task4Args;

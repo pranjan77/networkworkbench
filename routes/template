@@ -5,7 +5,7 @@
             "project": "default",
             "user": "default",
             "clientgroups":"",
-             "sessionId":"xyz"
+             "sessionId":"xyz1234"
         }, 
         "tasks": [
             {
@@ -80,7 +80,7 @@
             },
             {
                 "cmd": {
-                    "args": " @module_csv @net_edge_csv @annotation_csv -o merged_list_json -s sessionId -u url", 
+                    "args": "-m @module_csv -e @net_edge_csv -a @annotation_csv -o merged_list_json -u http://140.221.84.236:8000/node -s xyz12345", 
                     "description": "clustering", 
                     "name": "merge_csv"
                 }, 
@@ -96,7 +96,7 @@
                     },
                    "annotation_csv": {
                         "host": "http://localhost:8000",
-                        "node": "9e9aa0bc-01f5-4e2a-bf09-dcf18048d787"
+                        "node": "885f9e77-e26e-4030-aed2-22bd731becbe"
                     }
                 }, 
                 "outputs": {
