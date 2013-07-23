@@ -209,10 +209,11 @@
 						  <div style='padding: 30px 0 20px 30px;'>
 							  <center>
 								  The results file can be <a href='#' ><i class='icon-download-alt'></i> downloaded </a> <br/>
-								  An email is also sent with the file as attachement to <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
 							  </center>
 							  <div style='padding-top:30px;'>
-								  <iframe src="http://bl.ocks.org/christophermanning/raw/1703449/#/[29,25,-39,48,-17,20,-35,-9]20/0/0" height="600" frameBorder="0" style='width:100%;'></iframe>
+								  <div class='pull-right' ><i id='expand' class='icon-external-link'></i>
+								  </div>
+								  <iframe id='vizFrame' src="http://140.221.85.97/gvisualize/a75906ca-cf46-4339-b922-8dffa90706af" height="1060" frameBorder="0" style='width:100%;'></iframe>
 							  </div>
 						  </div>
 						  <hr>
@@ -245,7 +246,9 @@
     <script src="/js/all.min.js"></script>
 	<script type = 'text/javascript'>
 
+		var cId = '';
 		$(function() {
+			var vizURL = 'http://140.221.85.97/gvisualize/';
 			var loop = false;
 			$('#login').kbaseLogin(
 				{
@@ -311,6 +314,9 @@
 							$('#remTasks').text( data.data.remaintasks );
 							if ( status === 'completed' ) {
 								loop = false;
+								var vizShockFile = data.data.tasks[3].outputs.merged_list_json.node;
+								cId = vizShockFile;
+								$('#vizFrame').attr('src', vizURL +  vizShockFile);
 								$('#MyWizard').wizard('next','foo');
 							} else if ( status === 'submitted' ) {
 
@@ -352,6 +358,13 @@
 					$('#step2' + id ).text($('#' + id ).val().split('\\').pop());
 					}
 				});  
+			});
+
+			$('#expand').click(function() {
+
+				window.open(vizURL + cId, 'Network Workbench', 'window settings');
+				return false;
+					
 			});
 
 	
