@@ -115,7 +115,6 @@
 							  </form>
 						  </div>
 						  <hr>
-						  <br>Click 'Next' to continue.
 					  </div> <!-- End of Step 1 -->
 
 
@@ -160,7 +159,6 @@
 							  </form>
 						  </div>
 						  <hr>
-						  <br>Click 'Next' to continue.
 					  
 					  </div><!-- End of Step 2 -->
 
@@ -194,6 +192,7 @@
 								  <i class="icon-ok-sign icon-4x"></i> <br/><br/><br/><br/>
 								  Job completed <strong>successfully</strong>. <br/>
 								  Notification sent to <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
+										  <button type="button" id='visualize' class="btn btn-info">Show Network</button>
 							  </center>
 						  </div>
 						  <hr>
@@ -221,8 +220,8 @@
 					  </div><!-- End of Step 5 -->
 				  </div>
 				  <br>
-				  <input class="btn" id="btnWizardPrev" value="Back" type="button">
-				  <input class="btn btn-primary" id="btnWizardNext" value="Next" type="button">
+				  <input class="btn" id="btnWizardPrev" value="Back" type="button" style='display:none;'>
+				  <input class="btn btn-primary" id="btnWizardNext" value="Next" type="button" style='display:none;'>
 
 				</div>
 				<!-- /well -->
@@ -302,6 +301,10 @@
 					window.setInterval(checkStatus, 10000);
 				});
 				return false;
+			});
+
+			$('#visualize').click(function() {
+				$('#MyWizard').wizard('next','foo');
 			});
 
 			function checkStatus() { 
