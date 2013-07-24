@@ -87,10 +87,14 @@ auth = function(req, res, next) {
 		var experiment = {
 			sessionId : req.sessionID,
 			userName : '',
+			userEmail : '',
 			userGlobusToken: '',
 			startTime : now,
 			step1 : {
 				email : '',
+				filterparams : '-m anova -p 0.15 -u n -r y -d y',
+				clusterparams : '-m simple -t edge -c 0.75 -r 0.8 -k 40 -p 50',
+				moduleparams : '-s 100 -c hclust -n simple -r 0.8 -k 40 -p 50 -d 0.99',
 				expTable: {
 					fileName: '',
 					attributes:{},
@@ -162,6 +166,9 @@ app.get('/nw/step4',  routes.nwStep4);
 
 app.post('/uploadFileAction', auth, uploadHandler, routes.uploadFileAction);
 app.post('/updateEmail', auth, routes.updateEmail);
+app.post('/updatefp', auth, routes.updatefp);
+app.post('/updatecp', auth, routes.updatecp);
+app.post('/updatemp', auth, routes.updatemp);
 app.post('/submitJob', auth, routes.submitJob);
 app.post('/checkStatus', auth, routes.checkStatus);
 

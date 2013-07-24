@@ -81,6 +81,102 @@
 						  <h2>Network Co-expression Input</h2> 
 						  <blockquote><small>Please upload input expression table, sample id information and gene functional annotation.</small></blockquote>
 						  <hr>
+						  <div class='pull-right'>
+							  <a data-toggle="modal" href="#step1Help" class="btn btn-info"><i class='icon-question-sign' ></i></a>
+
+							  <!-- Modal -->
+							  <div id="step1Help" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								  <div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									  <h3 id="myModalLabel">Modal Heading</h3>
+								  </div>
+								  <div class="modal-body">
+									  <h3>Step 1 Help</h3>
+									  <h4>Filter and identify differentially expressed genes</h4>
+									  <p>
+									  	<pre>
+      This function identifies genes that are highly differentially expressed across samples using ANOVA (http://www.maths.bath.ac.uk/~jjf23/book/) 
+or Log-odd ratios (http://www.bioconductor.org/packages/2.12/bioc/html/limma.html).
+Users can identify the highly differentially expressed across samples either setting up a p-value threshold.
+
+      -m METHOD, --method=METHOD
+            Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor). [default "lor"]
+
+      -p P_THRESHOLD, --p_threshold=P_THRESHOLD
+            Maximum p-value up to which genes significantly highly differentially express [default 0.05]
+
+
+      -u HUMAN, --human=HUMAN
+            Accept human input regarding replicates? 'y' to allow, 'n' to automatically use defaults. [y/n]  (Default is 'n')
+
+      -r HAS_REPLICATES, --has_replicates=HAS_REPLICATES
+            Does your data have replicates (this helps avoid user input during program runtime)?  [y/n]  (Default is 'y')
+
+      -d DEFAULT_ACTION, --default_action=DEFAULT_ACTION
+            Use the default action when dealing with replicates?  [y/n]  (Default is 'y')
+										</pre>
+									  </p>
+									  <br/>
+									  <h4>Construct gene co-expression network (creates edges)</h4>
+									  <p>
+									  	<pre>
+      For a data matrix that represents gene expressions across samples, this function constructs the gene co-expression network
+using correlation matrix.
+
+      -m METHOD, --method=METHOD
+            Method to construct gene co-expression network. When method = "simple or "s, the function constructs gene co-expression network using Pearson correlation matrix whose elements less than corr_thld are set to be zero
+
+      -c CORR_THLD, --corr_thld=CORR_THLD
+            Maximum threshold to set elements of Pearson correlation matrix to be zero when method=simple. [default 0.75]
+
+      -q P_THLD, --p_thld=P_THLD
+            Maximum threshold for p from Pearson correlation when method=simple. [default NULL]
+
+      -r MINRSQ, --minRsq=MINRSQ
+            Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+      -k MAXMEDIANK, --maxmediank=MAXMEDIANK
+            Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+      -p MAXPOWER, --maxpower=MAXPOWER
+            Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+      -t TYPE, --type=TYPE
+            Type of output. When method = "edge or "e, the function outputs edge list of gene co-expression network consisting of gene pairs with Pearson correlation greater than corr_thld. When method = adjmat or "a, the function outputs the adjacency matrix of constructed gene co-expression network. [default "edge"]
+										</pre>
+									  </p>
+									  <br/>
+									  <h4>Clustering step (creates modules)</h4>
+									  <p>
+									  	<pre>
+      Given the gene expression table, this function clusters genes into co-expression modules using hierarchical clustering.
+
+      -n NET_METHOD, --net_method=NET_METHOD
+            Method to construct gene co-expression network. When net_method = "simple or "s, the function constructs gene co-expression network using Pearson correlation matrix. When net_method = WGCNA or "W, the function constructs gene co-expression network using Pearson correlations between genes, and signed network by WGCNA. [default "simple"]
+
+      -r MINRSQ, --minRsq=MINRSQ
+            Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+      -k MAXMEDIANK, --maxmediank=MAXMEDIANK
+            Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+      -p MAXPOWER, --maxpower=MAXPOWER
+            Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+      -c CLUST_METHOD, --clust_method=CLUST_METHOD
+            Method to cluster genes into co-expression modules. When clust_method = "hclust or "h,the function uses hierarchical clustering. When clust_method = WGCNA or "W, the function uses WGCNA. [default "WGCNA"]
+
+      -s MINMODULESIZE, --minModuleSize=MINMODULESIZE
+            Minimum size of modules when method is WGCNA. [default 50]
+
+      -d DETECTCUTHEIGHT, --detectCutHeight=DETECTCUTHEIGHT
+            Maximum heights to join modules in clustering. [default 0.99]
+										</pre>
+									  </p>
+									  <br/>
+								  </div>
+							  </div>
+						  </div>
 
 						  <div style='padding: 30px 0 20px 30px;'>
 							  <form class="form-horizontal" >
@@ -112,6 +208,27 @@
 										  <span type="file" id="geneAnnoOk" style='color:#00f; display:none;'><i id='geneAnnoOkIcon' class='icon-spinner icon-spin icon-large' > </i></span>
 									  </div>
 								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="filterParams">Filter Parameters</label>
+									  <div class="controls">
+										  <input type="text" class='input-xxlarge' id="filterParams" placeholder="" value='-m anova -p 0.05 -u n -r y -d y'>
+										  <span type="file" id="filterParamsOk" style='color:#00f; '><i id='filterParamsOkIcon' class='icon-ok' > </i></span>
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="clusterParams">Cluster Parameters</label>
+									  <div class="controls">
+										  <input type="text" class='input-xxlarge' id="clusterParams" placeholder="" value='-m simple -t edge -c 0.75 -r 0.8 -k 40 -p 50'>
+										  <span type="file" id="clusterParamsOk" style='color:#00f; '><i id='clusterParamsOkIcon' class='icon-ok' > </i></span>
+									  </div>
+								  </div>
+								  <div class="control-group">
+									  <label class="control-label" for="moduleParams">Module Parameters</label>
+									  <div class="controls">
+										  <input type="text" class='input-xxlarge' id="moduleParams" placeholder="" value='-s 100 -c hclust -n simple -r 0.8 -k 40 -p 50 -d 0.99'>
+										  <span type="file" id="moduleParamsOk" style='color:#00f; '><i id='moduleParamsOkIcon' class='icon-ok' > </i></span>
+									  </div>
+								  </div>
 							  </form>
 						  </div>
 						  <hr>
@@ -130,25 +247,25 @@
 								  <div class="control-group">
 									  <label class="control-label" for="inputEmail">Email</label>
 									  <div class="controls">
-										  <i class='icon-envelope-alt' ></i> <span id='step2Email'>ghkora@gmail.com </span>
+										  <i class='icon-envelope-alt' ></i> <span id='step2Email'> </span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="expTable">Upload Expression Table</label>
 									  <div class="controls">
-										  <i class='icon-file-alt' ></i> <span id='step2expTable'>exp-table.csv</span>
+										  <i class='icon-file-alt' ></i> <span id='step2expTable'></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="sampleId">Sample Id Information</label>
 									  <div class="controls">
-										  <i class='icon-file-alt' ></i> <span id='step2sampleId'>exp-table.csv</span>
+										  <i class='icon-file-alt' ></i> <span id='step2sampleId'></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
 									  <label class="control-label" for="geneAnno">Gene Annotations</label>
 									  <div class="controls">
-										  <i class='icon-file-alt' ></i> <span id='step2geneAnno'>exp-table.csv</span>
+										  <i class='icon-file-alt' ></i> <span id='step2geneAnno'></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
@@ -173,7 +290,7 @@
 								  <i id='bigsign' class="icon-spinner icon-spin icon-4x"></i> <br/><br/><br/><br/>
 								  Current Status <b><span id='status' >submitted</span></b> &nbsp; &nbsp; Tasks Remaining <b><span id='remTasks' >0</span></b> <br/>
 								  Job submitted <strong>successfully</strong>. The page will auto-refresh when ready.<br/>
-								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> <span id='step3Email'>ghkora@gmail.com</span>
+								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> <span id='step3Email'></span>
 </strong>.<br/>
 							  </center>
 						  </div>
@@ -191,7 +308,7 @@
 							  <center>
 								  <i class="icon-ok-sign icon-4x"></i> <br/><br/><br/><br/>
 								  Job completed <strong>successfully</strong>. <br/>
-								  Notification sent to <strong><i class='icon-envelope-alt' ></i> ghkora@gmail.com</strong>.<br/>
+								  Notification sent to <strong><i class='icon-envelope-alt' ></i><span id='step4Email'></span> </strong>.<br/>
 										  <button type="button" id='visualize' class="btn btn-info">Show Network</button>
 							  </center>
 						  </div>
@@ -212,7 +329,7 @@
 							  <div style='padding-top:30px;'>
 								  <div class='pull-right' ><i id='expand' class='icon-external-link'></i>
 								  </div>
-								  <iframe id='vizFrame' src="http://140.221.85.97/gvisualize/a75906ca-cf46-4339-b922-8dffa90706af" height="1060" frameBorder="0" style='width:100%;'></iframe>
+								  <iframe id='vizFrame' src="#" height="1060" frameBorder="0" style='width:100%;'></iframe>
 							  </div>
 						  </div>
 						  <hr>
@@ -237,9 +354,9 @@
 </div>
 <% include layout/footer %>
 </body>
+    <script src="/js/bootstrap.js"></script>
     <script src="/js/jquery.js"></script>
     <script src="/js/jquery.cookie.min.js"></script>
-    <script src="/js/bootstrap.js"></script>
     <script src="/js/kbase-ui-min.js"></script>
     <script src="/js/loader.min.js"></script>
     <script src="/js/all.min.js"></script>
@@ -290,8 +407,38 @@
 					$('#inputEmailOkIcon').attr('class', 'icon-ok');
 					$('#step2Email').text($('#inputEmail').val() );
 					$('#step3Email').text($('#inputEmail').val() );
+					$('#step4Email').text($('#inputEmail').val() );
 				});
 			});
+
+			$('#filterParams').change(function() {
+				$('#filterParamsOkIcon').attr('class', 'icon-spinner icon-spin icon-large');
+
+				$.post("/updatefp", { fp: $('#filterParams').val() })
+				.done(function(data) {
+					$('#filterParamsOkIcon').attr('class', 'icon-ok');
+				});
+			});
+
+			$('#clusterParams').change(function() {
+				$('#clusterParamsOkIcon').attr('class', 'icon-spinner icon-spin icon-large');
+
+				$.post("/updatecp", { cp: $('#clusterParams').val() })
+				.done(function(data) {
+					$('#clusterParamsOkIcon').attr('class', 'icon-ok');
+				});
+			});
+
+			$('#moduleParams').change(function() {
+				$('#moduleParamsOkIcon').attr('class', 'icon-spinner icon-spin icon-large');
+
+				$.post("/updatemp", { mp: $('#moduleParams').val() })
+				.done(function(data) {
+					$('#moduleParamsOkIcon').attr('class', 'icon-ok');
+				});
+			});
+
+
 
 			$('#submitJob').click(function() {
 				$.post("/submitJob", null)

@@ -12,6 +12,7 @@
     "mkdirp": "*",
     "dateformat": "*",
     "awe": "0.0.1",
-    "shock": "0.0.1"
+    "shock": "0.0.1",
+    "mongoose": "~3.6.15"
   }
 }

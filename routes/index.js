@@ -60,8 +60,48 @@ exports.updateEmail = function(req, res){
 	var sessionId = experiment.sessionId;
 
 	experiment.step1.email = req.body.email;
+	experiment.userEmail = req.body.email;
 	req.session.data = experiment;
 	//console.dir(experiment);
+	res.send(200);
+
+};
+
+exports.updatefp = function(req, res){
+
+	var session = res.locals.session;
+	var experiment = session.data;
+	var sessionId = experiment.sessionId;
+
+	experiment.step1.filterparams = req.body.fp;
+	req.session.data = experiment;
+	console.dir(experiment);
+	res.send(200);
+
+};
+
+exports.updatecp = function(req, res){
+
+	var session = res.locals.session;
+	var experiment = session.data;
+	var sessionId = experiment.sessionId;
+
+	experiment.step1.clusterparams = req.body.cp;
+	req.session.data = experiment;
+	console.dir(experiment);
+	res.send(200);
+
+};
+
+exports.updatemp = function(req, res){
+
+	var session = res.locals.session;
+	var experiment = session.data;
+	var sessionId = experiment.sessionId;
+
+	experiment.step1.moduleparams = req.body.mp;
+	req.session.data = experiment;
+	console.dir(experiment);
 	res.send(200);
 
 };
@@ -171,12 +211,8 @@ var prepareAWEInput = function(experiment, outputfile) {
 		sample_index = '@sample_id_csv',
 		d = 'y';
 
-	var task0Args = '-i @data_csv --output=data_filtered_csv -m ' + m +
-					' -p ' + p  + 
-					' --sample_index=' + sample_index  + 
-					' -u ' + u + 
-					' -r ' + r + 
-					' -d ' + d ; 
+	var task0Args = '-i @data_csv --output=data_filtered_csv --sample_index=@sample_id_csv  ' + experiment.step1.filterparams;
+
 	aweInput.tasks[0].cmd.args  = task0Args;
 
 	aweInput.tasks[0].inputs.data_csv.node = experiment.step1.expTable.shockId;
@@ -191,11 +227,8 @@ var prepareAWEInput = function(experiment, outputfile) {
 		k2 = 'n',
 		p2 = 'y';
 
-	var task2Args = '-i @data_filtered_csv -o net_edge_csv -m simple -t edge ' + 
-					' -c ' + c2  + 
-					' -r ' + r2  + 
-					' -k ' + k2  + 
-					' -p ' + p2;
+	var task2Args = '-i @data_filtered_csv -o net_edge_csv ' + experiment.step1.clusterparams;
+
 	aweInput.tasks[1].cmd.args  = task2Args;
 	// End of Input 2
 
@@ -208,12 +241,8 @@ var prepareAWEInput = function(experiment, outputfile) {
 		p3 = '50',
 		d3 = '0.99';
 
-	var task3Args = '-i @data_filtered_csv -o module_csv -c hclust -n simple ' + 
-					' -s ' + s3  + 
-					' -d ' + d3  + 
-					' -r ' + r3  + 
-					' -k ' + k3  + 
-					' -p ' + p3;
+	var task3Args = '-i @data_filtered_csv -o module_csv ' + experiment.step1.moduleparams;
+
 	aweInput.tasks[2].cmd.args  = task3Args;
 	// End of Input 3
 
