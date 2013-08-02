@@ -1,0 +1,112 @@
+    {
+        "info": {
+            "pipeline": "coex-example",
+            "name": "testcoex",
+            "project": "default",
+            "user": "default",
+            "clientgroups":"",
+             "sessionId":"xyz1234"
+        }, 
+        "tasks": [
+            {
+                "cmd": {
+                    "args": "-i @data_csv --output=data_filtered_csv -m anova -p 0.05 --sample_index=@sample_id_csv  -u n -r y -d y", 
+                    "description": "filtering", 
+                    "name": "coex_filter"
+                }, 
+                "dependsOn": [], 
+                "inputs": {
+                   "data_csv": {
+                        "host": "http://localhost:8000",
+                        "node": "0a66c749-ba9a-40fc-b1c5-7e82e6c42003"
+                    },
+                   "sample_id_csv": {
+                        "host": "http://localhost:8000",
+                        "node": "9e9aa0bc-01f5-4e2a-bf09-dcf18048d787"
+                    }
+                }, 
+                "outputs": {
+                    "data_filtered_csv": {
+                        "host": "http://localhost:8000"
+                    }
+                },
+                "taskid": "0",
+                "skip": 0,
+                "totalwork": 1                
+            },
+            {
+                "cmd": {
+                    "args": "-i @data_filtered_csv -o net_edge_csv -m simple -t edge -c 0.75 -r 0.8 -k 40 -p 50", 
+                    "description": "coex network", 
+                    "name": "coex_net"
+                }, 
+                "dependsOn": ["0"], 
+                "inputs": {
+                   "data_filtered_csv": {
+                        "host": "http://localhost:8000",
+                        "origin": "0"
+                    }
+                }, 
+                "outputs": {
+                    "net_edge_csv": {
+                        "host": "http://localhost:8000"
+                    }
+                },
+                "taskid": "1",
+                "skip": 0, 
+                "totalwork": 1
+            },
+            {
+                "cmd": {
+                    "args": "-i @data_filtered_csv -o module_csv -s 100 -c hclust -n simple -r 0.8 -k 40 -p 50 -d 0.99", 
+                    "description": "clustering", 
+                    "name": "coex_cluster2"
+                }, 
+                "dependsOn": ["1"], 
+                "inputs": {
+                   "data_filtered_csv": {
+                        "host": "http://localhost:8000",
+                        "origin": "0"
+                    }
+                }, 
+                "outputs": {
+                    "module_csv": {
+                        "host": "http://localhost:8000"
+                    }
+                },
+                "taskid": "2",
+                "skip": 0,
+                "totalwork": 1
+            },
+            {
+                "cmd": {
+                    "args": "-m @module_csv -e @net_edge_csv -a @annotation_csv -o merged_list_json -u http://140.221.84.236:8000/node -s xyz12345", 
+                    "description": "clustering", 
+                    "name": "merge_csv"
+                }, 
+                "dependsOn": ["2"], 
+                "inputs": {
+                   "module_csv": {
+                        "host": "http://localhost:8000",
+                        "origin": "2"
+                    },
+                   "net_edge_csv": {
+                        "host": "http://localhost:8000",
+                        "origin": "1"
+                    },
+                   "annotation_csv": {
+                        "host": "http://localhost:8000",
+                        "node": "885f9e77-e26e-4030-aed2-22bd731becbe"
+                    }
+                }, 
+                "outputs": {
+                    "merged_list_json": {
+                        "host": "http://localhost:8000"
+                    }
+                },
+                "taskid": "3",
+                "skip": 0,
+                "totalwork": 1
+            }
+        ]
+    }

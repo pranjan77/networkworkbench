@@ -185,6 +185,8 @@ exports.checkStatus = function(req, res) {
 			experiment.step3.status = result.data.state;
 			experiment.step3.visited = true;
 			req.session.data = experiment;
+			console.dir(result);
+			console.dir(result.data.tasks);
 			res.send(200, result);
 		}
 	});

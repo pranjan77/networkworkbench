@@ -71,8 +71,10 @@
 					  <li data-target="#step5"><span class="badge">5</span>Step 5<span class="chevron"></span></li>
 					</ul>
 					<div class="actions">
-					  <button class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
-					  <button class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+						<!--
+					  <button class="btn btn-mini btn-prev" id='myPrev'> <i class="icon-arrow-left"></i>Prev</button>
+					  <button class="btn btn-mini btn-next" data-last="Finish" id='myNext'>Next<i class="icon-arrow-right"></i></button>
+					  -->
 					</div>
 				  </div>
 				  <div class="step-content">
@@ -82,16 +84,14 @@
 						  <blockquote><small>Please upload input expression table, sample id information and gene functional annotation.</small></blockquote>
 						  <hr>
 						  <div class='pull-right'>
-							  <a data-toggle="modal" href="#step1Help" class="btn btn-info"><i class='icon-question-sign' ></i></a>
 
 							  <!-- Modal -->
 							  <div id="step1Help" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								  <div class="modal-header">
 									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									  <h3 id="myModalLabel">Modal Heading</h3>
+									  <h3 id="myModalLabel">Help</h3>
 								  </div>
 								  <div class="modal-body">
-									  <h3>Step 1 Help</h3>
 									  <h4>Filter and identify differentially expressed genes</h4>
 									  <p>
 									  	<pre>
@@ -117,6 +117,14 @@ Users can identify the highly differentially expressed across samples either set
 										</pre>
 									  </p>
 									  <br/>
+								  </div>
+							  </div>
+							  <div id="step2Help" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								  <div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									  <h3 id="myModalLabel">Help</h3>
+								  </div>
+								  <div class="modal-body">
 									  <h4>Construct gene co-expression network (creates edges)</h4>
 									  <p>
 									  	<pre>
@@ -146,6 +154,14 @@ using correlation matrix.
 										</pre>
 									  </p>
 									  <br/>
+								  </div>
+							  </div>
+							  <div id="step3Help" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								  <div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									  <h3 id="myModalLabel">Help</h3>
+								  </div>
+								  <div class="modal-body">
 									  <h4>Clustering step (creates modules)</h4>
 									  <p>
 									  	<pre>
@@ -209,27 +225,40 @@ using correlation matrix.
 									  </div>
 								  </div>
 								  <div class="control-group">
-									  <label class="control-label" for="filterParams">Filter Parameters</label>
+									  <label class="control-label" for="filterParams">Filter Parameters 
+							  			<a data-toggle="modal" href="#step1Help" class=""><i class='icon-question-sign' ></i></a>
+									</label>
 									  <div class="controls">
-										  <input type="text" class='input-xxlarge' id="filterParams" placeholder="" value='-m anova -p 0.05 -u n -r y -d y'>
+										  coex_filter &nbsp; &nbsp; &nbsp;  <input type="text" class='input-xxlarge' id="filterParams" placeholder="" value='-m anova -p 0.05 -u n -r y -d y'>
 										  <span type="file" id="filterParamsOk" style='color:#00f; '><i id='filterParamsOkIcon' class='icon-ok' > </i></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
-									  <label class="control-label" for="clusterParams">Cluster Parameters</label>
+									  <label class="control-label" for="clusterParams">Cluster Parameters 
+							  			<a data-toggle="modal" href="#step2Help" class=""><i class='icon-question-sign' ></i></a>
+									</label>
 									  <div class="controls">
-										  <input type="text" class='input-xxlarge' id="clusterParams" placeholder="" value='-m simple -t edge -c 0.75 -r 0.8 -k 40 -p 50'>
+										  coex_net &nbsp; &nbsp; &nbsp; &nbsp; <input type="text" class='input-xxlarge' id="clusterParams" placeholder="" value='-m simple -t edge -c 0.75 -r 0.8 -k 40 -p 50'>
 										  <span type="file" id="clusterParamsOk" style='color:#00f; '><i id='clusterParamsOkIcon' class='icon-ok' > </i></span>
 									  </div>
 								  </div>
 								  <div class="control-group">
-									  <label class="control-label" for="moduleParams">Module Parameters</label>
+									  <label class="control-label" for="moduleParams">Module Parameters 
+							  			<a data-toggle="modal" href="#step3Help" class=""><i class='icon-question-sign' ></i></a>
+										  </label>
 									  <div class="controls">
-										  <input type="text" class='input-xxlarge' id="moduleParams" placeholder="" value='-s 100 -c hclust -n simple -r 0.8 -k 40 -p 50 -d 0.99'>
+										  coex_cluster2 <input type="text" class='input-xxlarge' id="moduleParams" placeholder="" value='-s 100 -c hclust -n simple -r 0.8 -k 40 -p 50 -d 0.99'>
 										  <span type="file" id="moduleParamsOk" style='color:#00f; '><i id='moduleParamsOkIcon' class='icon-ok' > </i></span>
 									  </div>
 								  </div>
+								  <div class="control-group">
+									  <div class="controls">
+										  <button type="button" id='inputDone' class="btn btn-info">Goto Next Step</button>
+									  </div>
+								  </div>
 							  </form>
+							  Ref: Sample Input Data: <a href='http://genomics.ag.utk.edu/share/network/datafinal/' target='_blank'>Download From Here</a> <br/>
+							  Ref: Command Line Tutorial: <a href='http://kbase.us/for-users/tutorials/analyzing-data/plant-genome-analysis/plant-expression-service/' target='_blank'>KBase expression and coexpression tutorial</a> 
 						  </div>
 						  <hr>
 					  </div> <!-- End of Step 1 -->
@@ -288,7 +317,7 @@ using correlation matrix.
 						  <div style='padding: 30px 0 20px 30px;'>
 							  <center>
 								  <i id='bigsign' class="icon-spinner icon-spin icon-4x"></i> <br/><br/><br/><br/>
-								  Current Status <b><span id='status' >submitted</span></b> &nbsp; &nbsp; Tasks Remaining <b><span id='remTasks' >0</span></b> <br/>
+								  Current Status <b><span id='status' >submitted</span></b> &nbsp; &nbsp; Tasks Remaining <b><span id='remTasks' >4</span></b> <br/>
 								  Job submitted <strong>successfully</strong>. The page will auto-refresh when ready.<br/>
 								  Once done, you will be notified at <strong><i class='icon-envelope-alt' ></i> <span id='step3Email'></span>
 </strong>.<br/>
@@ -322,9 +351,12 @@ using correlation matrix.
 						  <blockquote><small>Visualize the network. Nodes and edges are displayed for individual clusters.</small></blockquote>
 						  <hr>
 
-						  <div style='padding: 30px 0 20px 30px;'>
+						  <div style='padding: 10px 0 10px 30px;'>
 							  <center>
-								  The results file can be <a href='#' ><i class='icon-download-alt'></i> downloaded </a> <br/>
+								  The results file can be downloaded here <br/><a href='#' id='task0' target='_blank'><i class='icon-download-alt'></i> Filtered Expression Table</a> <br/> 
+								  <a href='#' id='task1' target='_blank'><i class='icon-download-alt' ></i> Edges in the Network</a><br/>  
+								  <a href='#' id='task2' target='_blank'><i class='icon-download-alt' ></i> Modules in the Network</a><br/>
+								 	<br/>
 							  </center>
 							  <div style='padding-top:30px;'>
 								  <div class='pull-right' ><i id='expand' class='icon-external-link'></i>
@@ -454,11 +486,16 @@ using correlation matrix.
 				$('#MyWizard').wizard('next','foo');
 			});
 
+			$('#inputDone').click(function() {
+				$('#MyWizard').wizard('next','foo');
+			});
+
 			function checkStatus() { 
 				if (loop) {
 					$.post("/checkStatus")
 					.done(function(data, textStatus, xhr) {
 						if ( xhr.status === 200 ) {
+							console.dir(data);
 							var status = data.data.state;
 							$('#status').text( status );
 							$('#remTasks').text( data.data.remaintasks );
@@ -467,6 +504,9 @@ using correlation matrix.
 								var vizShockFile = data.data.tasks[3].outputs.merged_list_json.node;
 								cId = vizShockFile;
 								$('#vizFrame').attr('src', vizURL +  vizShockFile);
+								$('#task0').attr('href', data.data.tasks[0].outputs.data_filtered_csv.url);
+								$('#task1').attr('href', data.data.tasks[1].outputs.net_edge_csv.url);
+								$('#task2').attr('href', data.data.tasks[2].outputs.module_csv.url);
 								$('#MyWizard').wizard('next','foo');
 							} else if ( status === 'submitted' ) {
 
